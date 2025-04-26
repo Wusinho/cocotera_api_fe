@@ -60,7 +60,8 @@
               "buildTarget": "cocotera_api_fe:build:production"
             },
             "development": {
-              "buildTarget": "cocotera_api_fe:build:development"
+              "buildTarget": "cocotera_api_fe:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
