@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './edit-client.component.css'
 })
 export class EditClientComponent implements OnInit {
-  clientId: number = 1;
+  clientId: number = 0;
   client?: Client
 
   constructor(

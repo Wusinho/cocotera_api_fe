@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody
-   *ngFor="let client of filteredClients"
+   *ngFor="let client of clients"
     >
     <tr>
       <th scope="row">{{client.id}}</th>
@@ -24,6 +24,26 @@
     </tr>
   </tbody>
 </table>
+
+<nav *ngIf="totalPages > 1">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
+    </li>
+
+    <li
+      class="page-item"
+      *ngFor="let page of [].constructor(totalPages); let i = index"
+      [class.active]="currentPage === i + 1"
+    >
+      <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
+    </li>
+
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
+    </li>
+  </ul>
+</nav>
 
 
 </div>

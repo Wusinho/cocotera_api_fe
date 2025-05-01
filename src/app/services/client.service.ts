@@ -12,6 +12,16 @@ export interface Client {
   email: string;
 }
 
+export interface PageResponse<T> {
+  content: T[];
+  totalPages: number;
+  totalElements: number;
+  number: number;
+  size: number;
+  first: boolean;
+  last: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,8 +31,8 @@ export class ClientService {
 
   constructor(private http: HttpClient) {}
 
-  getClients(): Observable<Client[]> {
-    return this.http.get<Client[]>(`${this.baseUrl}/listar`);
+  getClients(page: number = 0, size: number = 8): Observable<PageResponse<Client>> {
+    return this.http.get<PageResponse<Client>>(`${this.baseUrl}/listar?page=${page}&size=${size}`);
   }
 
   getClient(id: number): Observable<Client>{
