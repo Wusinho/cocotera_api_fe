@@ -36,6 +36,9 @@ export class FacturaCreateComponent {
     });
   }
 
+  goBack() {
+    this.router.navigate(['/clients']);
+  }
 incrementCantidad(producto: any) {
     producto.cantidad++;
   }

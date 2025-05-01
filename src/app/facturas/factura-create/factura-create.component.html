@@ -28,8 +28,9 @@
 
     <h4 class="text-end mt-4">Total: ${{ calcularTotal() }}</h4>
 
-    <div class="text-end">
-      <button type="submit" class="btn btn-primary mt-3">Guardar Factura</button>
+    <div class="d-flex gap-2 align-items-center">
+      <button type="submit" class="btn btn-primary ms-2">Guardar Factura</button>
+      <button type="button" class="btn btn-secondary ms-2" (click)="goBack()">Regresar</button>
     </div>
   </form>
 </div>

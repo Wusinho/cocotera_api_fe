@@ -1,5 +1,19 @@
 <div class="container">
   <h1>Clientes</h1>
+<div class="mb-3">
+  <label for="clientType" class="form-label">Tipo de Cliente:</label>
+  <select
+    id="clientType"
+    class="form-select"
+    [(ngModel)]="selectedClientType"
+    (change)="onClienTypeChange()"
+  >
+    <option [ngValue]="0">Todos</option>
+    <option *ngFor="let type of clienttypes" [ngValue]="type.id">
+      {{ type.nombre }}
+    </option>
+  </select>
+</div>
 
 <table class="table">
   <thead>

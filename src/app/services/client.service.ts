@@ -31,8 +31,24 @@ export class ClientService {
 
   constructor(private http: HttpClient) {}
 
-  getClients(page: number = 0, size: number = 8): Observable<PageResponse<Client>> {
-    return this.http.get<PageResponse<Client>>(`${this.baseUrl}/listar?page=${page}&size=${size}`);
+getClients(page: number, size: number, tipoClienteId?: number): Observable<PageResponse<Client>> {
+  const params: any = {
+    page,
+    size,
+  };
+
+  if (tipoClienteId != null) {
+    params.tipo_cliente_id = tipoClienteId;
+  }
+
+  return this.http.get<PageResponse<Client>>(`${this.baseUrl}/listar`, { params });
+}
+
+
+  getClientsWithParams(params: any): Observable<PageResponse<Client>> {
+    console.log('Client with params any')
+
+    return this.http.get<PageResponse<Client>>('/api/clientes/listar', { params });
   }
 
   getClient(id: number): Observable<Client>{

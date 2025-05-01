@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService, Client } from '../../services/client.service';
+import { ClientTypeService, ClientType } from '../../services/clienttype.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -14,6 +15,8 @@ import { Router } from '@angular/router';
 export class ClientListComponent implements OnInit {
 
   clients: Client[] = [];
+  clienttypes: ClientType[] = [];
+  selectedClientType: number = 0;
   filteredClients: Client[] = [];
   searchTerm: string = '';
 
@@ -23,13 +26,38 @@ export class ClientListComponent implements OnInit {
 
   constructor(
     private clientService: ClientService,
+    private clientTypeService: ClientTypeService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.clientService.getClients().subscribe(data => {
-      this.clients = data.content;
+    this.loadClients();
+    this.loadClientTypes();
+  }
+
+  loadClientTypes(): void {
+    this.clientTypeService.getClientType().subscribe(data => {
+      this.clienttypes = data;
     });
+  }
+
+  loadClients(page: number = 1): void {
+    const tipoId: number | undefined =
+    this.selectedClientType != null && this.selectedClientType !== 0
+    ? this.selectedClientType
+    : undefined;
+
+
+    this.clientService.getClients(page - 1, this.itemsPerPage, tipoId).subscribe(data => {
+      this.clients = data.content;
+      this.totalPages = data.totalPages;
+      this.currentPage = data.number + 1;
+    });
+  }
+
+  onClienTypeChange(): void {
+    this.currentPage = 1;
+    this.loadClients();
   }
 
   updatePagination(){
