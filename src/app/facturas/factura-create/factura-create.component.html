@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <h2>Crear Factura</h2>
+
+  <form (ngSubmit)="createFactura()">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos">
+          <td>{{ producto.nombre }}</td>
+          <td>${{ producto.precio }}</td>
+          <td>{{ producto.cantidad || 0 }}</td>
+          <td>${{ (producto.cantidad || 0) * producto.precio }}</td>
+          <td>
+            <button type="button" class="btn btn-success btn-sm" (click)="incrementCantidad(producto)">+</button>
+            <button type="button" class="btn btn-danger btn-sm ms-2" (click)="decrementCantidad(producto)">-</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4 class="text-end mt-4">Total: ${{ calcularTotal() }}</h4>
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-primary mt-3">Guardar Factura</button>
+    </div>
+  </form>
+</div>
+

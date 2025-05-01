@@ -1,26 +1,29 @@
-<<div class="container">
-  <h1>Clients</h1>
+<div class="container">
+  <h1>Clientes</h1>
 
-  <input
-    type="text"
-    class="form-control my-3"
-    placeholder="Search clients..."
-    [(ngModel)]="searchTerm"
-  />
-
-  <div class="row">
-    <div
-      class="col-md-4 mb-3"
-      *ngFor="let client of filteredClients"
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre del CLiente</th>
+      <th scope="col">DNI</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody
+   *ngFor="let client of filteredClients"
     >
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">{{ client.razonSocial }}</h5>
-          <p class="card-text">RUC: {{ client.ruc }}</p>
-          <p class="card-text">Address: {{ client.direccion }}</p>
-          <button class="btn btn-primary btn-sm">View Details</button>
-        </div>
-      </div>
-    </div>
-  </div>
+    <tr>
+      <th scope="row">{{client.id}}</th>
+      <td>{{client.nombres }} {{ client.apellidos}}</td>
+      <td>{{client.dni}}</td>
+      <td class="d-flex gap-2">
+        <button class="btn btn-warning btn-sm" (click)="editClient(client.id)" > Editar</button>
+        <button class="btn btn-primary btn-sm " (click)="facturarClient(client.id)" > Facturar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
 </div>

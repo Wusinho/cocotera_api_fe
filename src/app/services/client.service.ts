@@ -4,9 +4,12 @@ import { Observable } from 'rxjs';
 
 export interface Client {
   id: number;
-  razonSocial: string;
-  ruc: string;
+  apellidos: string;
+  nombres: string;
+  dni: string;
   direccion: string;
+  telefono: string;
+  email: string;
 }
 
 @Injectable({
@@ -14,12 +17,21 @@ export interface Client {
 })
 export class ClientService {
 
-  private apiUrl = '/api/clientes/listar';
+  private baseUrl = '/api/clientes';
 
   constructor(private http: HttpClient) {}
 
   getClients(): Observable<Client[]> {
-    return this.http.get<Client[]>(this.apiUrl);
+    return this.http.get<Client[]>(`${this.baseUrl}/listar`);
   }
+
+  getClient(id: number): Observable<Client>{
+    return this.http.get<Client>(`${this.baseUrl}/${id}`)
+  }
+
+  updateClient(id: number, client: Client): Observable<any> {
+    return this.http.put(`${this.baseUrl}/actualizar/${id}`, client);
+  }
+
 }
 
