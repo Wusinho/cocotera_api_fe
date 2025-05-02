@@ -40,7 +40,7 @@ export class EditClientComponent implements OnInit {
   updateClient() {
     if (this.client) {
       this.clientService.updateClient(this.clientId, this.client).subscribe(response => {
-        this.router.navigate(['/clients']); // Redirect back to list after saving
+        this.router.navigate(['/clients']);
       });
     }
   }

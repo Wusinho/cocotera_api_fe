@@ -75,4 +75,9 @@ export class ClientListComponent implements OnInit {
     this.router.navigate(['/facturas/create', clientId]);
   }
 
+  clientFacturas(clientId: number){
+    console.log('client id', clientId)
+    this.router.navigate(['/facturas/show', clientId])
+  }
+
 }

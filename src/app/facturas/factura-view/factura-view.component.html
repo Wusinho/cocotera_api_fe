@@ -1,0 +1,47 @@
+<div class="container">
+<div class="container mt-4" *ngIf="facturas.length > 0">
+  <h2>Facturas de {{ facturas[0].cliente.nombres }} {{ facturas[0].cliente.apellidos }}</h2>
+  <p><strong>DNI:</strong> {{ facturas[0].cliente.dni }}</p>
+  <p><strong>Dirección:</strong> {{ facturas[0].cliente.direccion }}</p>
+  <hr>
+
+  <div *ngFor="let factura of facturas" class="mb-5">
+    <h4>Factura #{{ factura.id }}</h4>
+
+    <table class="table table-bordered table-striped mt-3">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Categoría</th>
+          <th>Color</th>
+          <th>Precio Unitario</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of factura.productos">
+          <td>{{ item.producto.nombre }}</td>
+          <td>{{ item.producto.categoria }}</td>
+          <td>{{ item.producto.color }}</td>
+          <td>S/ {{ item.producto.precio }}</td>
+          <td>{{ item.cantidad }}</td>
+          <td>S/ {{ item.total }}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5" class="text-end"><strong>Total Factura:</strong></td>
+          <td><strong>S/ {{ getFacturaTotal(factura) }}</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<div class="container mt-4" *ngIf="facturas.length === 0">
+  <h4>No se encontraron facturas para este cliente.</h4>
+</div>
+
+    <button type="button" class="btn btn-secondary ms-2" (click)="goBack()">Regresar</button>
+</div>

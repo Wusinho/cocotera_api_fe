@@ -1,10 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Client } from './client.service';
+
+export interface FacturaProducto {
+  id: number;
+  producto: {
+    id: number;
+    nombre: string;
+    categoria: string;
+    color: string;
+    precio: number;
+    talla: any; // or define a separate Talla interface
+  };
+  cantidad: number;
+  total: number;
+}
 
 export interface Factura {
   id: number;
-  cliente_id: number;
+  cliente: Client;
+  productos: FacturaProducto[];
 
 }
 
