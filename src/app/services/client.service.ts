@@ -10,6 +10,7 @@ export interface Client {
   direccion: string;
   telefono: string;
   email: string;
+  tipoClienteId: number;
 }
 
 export interface PageResponse<T> {

@@ -60,13 +60,6 @@ export class ClientListComponent implements OnInit {
     this.loadClients();
   }
 
-  updatePagination(){
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    this.filteredClients = this.clients.slice(start, end);
-    this.totalPages = Math.ceil(this.clients.length / this.itemsPerPage);
-  }
-
   editClient(clientId: number) {
     this.router.navigate(['/clients/edit', clientId])
   }
@@ -74,7 +67,7 @@ export class ClientListComponent implements OnInit {
   goToPage(page: number){
     if (page >= 1 && page <= this.totalPages){
       this.currentPage = page;
-      this.updatePagination();
+      this.loadClients(page);
     }
   }
 
