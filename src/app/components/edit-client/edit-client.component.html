@@ -1,6 +1,9 @@
 <div class="container mt-4" *ngIf="client">
   <h2>Actualizar CLiente</h2>
 
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
   <form (ngSubmit)="updateClient()">
     <div class="form-group mb-3">
       <label for="nombres">Nombres</label>
