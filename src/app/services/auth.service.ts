@@ -1,21 +1,40 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  saveAuth(username: string, password: string): void {
-    const basicAuth = btoa(`${username}:${password}`);
-    localStorage.setItem('authToken', basicAuth);
+  private baseUrl = 'http://localhost:8080'; // adjust if needed
+  private tokenKey = 'authToken';
+
+  constructor(private http: HttpClient) { }
+
+  login(email: string, password: string): Observable<any> {
+    const body = { email, password };
+    return this.http
+      .post(`${this.baseUrl}/session`, body, { observe: 'response' })
+      .pipe(
+        tap((response) => {
+          const authHeader = response.headers.get('Authorization');
+          if (authHeader && authHeader.startsWith('Bearer ')) {
+            const token = authHeader.replace('Bearer ', '');
+            localStorage.setItem(this.tokenKey, token);
+          }
+        }),
+      );
   }
 
-  getAuthToken(): string | null {
-    return localStorage.getItem('authToken');
+  logout(): void {
+    localStorage.removeItem(this.tokenKey);
   }
 
-  clearAuth(): void {
-    localStorage.removeItem('authToken');
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.getToken();
   }
 }

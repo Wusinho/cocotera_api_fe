@@ -4,13 +4,13 @@
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
+        <label for="email" class="form-label">Email</label>
         <input
           type="text"
           class="form-control"
-          id="username"
-          formControlName="username"
-          placeholder="Enter your username"
+          id="email"
+          formControlName="email"
+          placeholder="Enter your Email"
           required
         >
       </div>
