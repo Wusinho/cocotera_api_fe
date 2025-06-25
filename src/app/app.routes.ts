@@ -4,12 +4,15 @@ import { ClientListComponent } from './components/client-list/client-list.compon
 import { EditClientComponent } from './components/edit-client/edit-client.component';
 import { FacturaCreateComponent } from './facturas/factura-create/factura-create.component';
 import { FacturaViewComponent } from './facturas/factura-view/factura-view.component';
+import { ProductsListComponent } from './views/products-list/products-list.component';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
   { path: '', component: SessionComponent },
-  { path: 'clients', component: ClientListComponent },
-  { path: 'clients/edit/:id', component: EditClientComponent },
-  { path: 'facturas/create/:clientId', component: FacturaCreateComponent },
-  { path: 'facturas/show/:clientId', component: FacturaViewComponent}
-
+  { path: 'clients', component: ClientListComponent , canActivate: [AuthGuard] },
+  { path: 'clients/edit/:id', component: EditClientComponent , canActivate: [AuthGuard] },
+  { path: 'facturas/create/:clientId', component: FacturaCreateComponent , canActivate: [AuthGuard] },
+  { path: 'facturas/show/:clientId', component: FacturaViewComponent, canActivate: [AuthGuard] },
+  { path: 'productos', component: ProductsListComponent , canActivate: [AuthGuard] },
+  { path: 'products/edit/:id', component: EditClientComponent , canActivate: [AuthGuard] },
 ];

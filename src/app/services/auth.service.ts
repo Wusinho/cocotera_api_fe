@@ -1,25 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080'; // adjust if needed
-  private tokenKey = 'authToken';
+  private baseUrl = environment.apiUrl;
+  private tokenKey = 'jwtToken';
 
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
-    const body = { email, password };
     return this.http
-      .post(`${this.baseUrl}/session`, body, { observe: 'response' })
+      .post(
+        `${this.baseUrl}/session`,
+        { email, password },
+        { observe: 'response' },
+      )
       .pipe(
         tap((response) => {
           const authHeader = response.headers.get('Authorization');
-          if (authHeader && authHeader.startsWith('Bearer ')) {
+          if (authHeader?.startsWith('Bearer ')) {
             const token = authHeader.replace('Bearer ', '');
+            console.log(token)
             localStorage.setItem(this.tokenKey, token);
           }
         }),
@@ -34,7 +39,21 @@ export class AuthService {
     return localStorage.getItem(this.tokenKey);
   }
 
+  getAuthHeader(): HttpHeaders {
+    return new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+    });
+  }
+
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    const token = this.getToken();
+    if (!token) return false;
+
+    try {
+      const { exp } = JSON.parse(atob(token.split('.')[1]));
+      return exp > Math.floor(Date.now() / 1000);
+    } catch {
+      return false;
+    }
   }
 }

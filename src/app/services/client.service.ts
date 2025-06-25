@@ -24,41 +24,41 @@ export interface PageResponse<T> {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClientService {
-
-  private baseUrl = '/api/clientes';
+  private baseUrl = '/admin/clientes';
 
   constructor(private http: HttpClient) {}
 
-getClients(page: number, size: number, tipoClienteId?: number): Observable<PageResponse<Client>> {
-  const params: any = {
-    page,
-    size,
-  };
+  getClients(
+    page: number,
+    size: number,
+    tipoClienteId?: number,
+  ): Observable<PageResponse<Client>> {
+    const params: any = {
+      page,
+      size,
+    };
 
-  if (tipoClienteId != null) {
-    params.tipo_cliente_id = tipoClienteId;
+    if (tipoClienteId != null) {
+      params.tipo_cliente_id = tipoClienteId;
+    }
+
+    return this.http.get<PageResponse<Client>>(`${this.baseUrl}`, { params });
   }
-
-  return this.http.get<PageResponse<Client>>(`${this.baseUrl}/listar`, { params });
-}
-
 
   getClientsWithParams(params: any): Observable<PageResponse<Client>> {
-    console.log('Client with params any')
-
-    return this.http.get<PageResponse<Client>>('/api/clientes/listar', { params });
+    return this.http.get<PageResponse<Client>>('/admin/clientes', {
+      params,
+    });
   }
 
-  getClient(id: number): Observable<Client>{
-    return this.http.get<Client>(`${this.baseUrl}/${id}`)
+  getClient(id: number): Observable<Client> {
+    return this.http.get<Client>(`${this.baseUrl}/${id}`);
   }
 
   updateClient(id: number, client: Client): Observable<any> {
-    return this.http.put(`${this.baseUrl}/actualizar/${id}`, client);
+    return this.http.put(`${this.baseUrl}/${id}`, client);
   }
-
 }
-

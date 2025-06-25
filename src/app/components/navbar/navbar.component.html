@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand" >La Cocotera</a>
+
+   <div class="collapse navbar-collapse" id="navbarNav" *ngIf="authService.isLoggedIn()">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/clients">Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/productos">Productos</a>
+        </li>
+
+        <li class="nav-item" *ngIf="authService.isLoggedIn()">
+          <button class="btn btn-outline-danger ms-2" (click)="logout()">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
