@@ -8,8 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-product-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './product-form.component.html',
-  styleUrl: './product-form.component.css'
+  templateUrl: './product-form.component.html'
 })
 export class ProductFormComponent implements OnInit {
   productForm!: FormGroup;
@@ -38,7 +37,7 @@ export class ProductFormComponent implements OnInit {
       this.productService.getProducto(+id).subscribe(product => {
         this.productForm.patchValue({
           ...product,
-          tallaId: product.talla_id // Ensure property matches
+          tallaId: product.talla.id
         });
       });
     }
@@ -56,7 +55,12 @@ export class ProductFormComponent implements OnInit {
   onSubmit(): void {
     if (this.productForm.invalid) return;
 
-    const productData = this.productForm.value;
+    const productData ={
+      ...this.productForm.value,
+      tallaId: +this.productForm.value.tallaId
+    }
+    console.log(productData)
+
 
     if (this.editing) {
       const id = +this.route.snapshot.paramMap.get('id')!;

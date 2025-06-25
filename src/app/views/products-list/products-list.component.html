@@ -9,6 +9,7 @@
         <th>Categoría</th>
         <th>Color</th>
         <th>Precio</th>
+        <th>Cambios</th>
       </tr>
     </thead>
     <tbody>
@@ -18,6 +19,9 @@
         <td>{{ producto.categoria }}</td>
         <td>{{ producto.color }}</td>
         <td>S/ {{ producto.precio }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" (click)="editarProducto(producto)">Editar</button>
+        </td>
       </tr>
     </tbody>
   </table>

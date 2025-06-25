@@ -4,7 +4,6 @@ import { ProductoService } from '../../services/producto.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-products-list',
   standalone: true,
@@ -14,19 +13,27 @@ import { Router } from '@angular/router';
 export class ProductsListComponent implements OnInit {
   productos: any[] = [];
 
-  constructor(private productoService: ProductoService, private auth: AuthService, private router: Router) {}
+  constructor(
+    private productoService: ProductoService,
+    private auth: AuthService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.productoService.getProductos().subscribe({
-      next: data => {
+      next: (data) => {
         this.productos = data;
       },
-      error: err => console.error('Error al obtener productos', err)
+      error: (err) => console.error('Error al obtener productos', err),
     });
   }
 
   crearProducto() {
     this.router.navigate(['/productos/create']);
   }
-}
 
+  editarProducto(producto: any) {
+    console.log(producto);
+    this.router.navigate(['/productos/edit', producto.id]);
+  }
+}

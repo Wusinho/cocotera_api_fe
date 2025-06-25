@@ -16,5 +16,5 @@ export const routes: Routes = [
   { path: 'facturas/show/:clientId', component: FacturaViewComponent, canActivate: [AuthGuard] },
   { path: 'productos', component: ProductsListComponent , canActivate: [AuthGuard] },
   { path: 'productos/create', component: ProductFormComponent , canActivate: [AuthGuard] },
-  { path: 'products/edit/:id', component: EditClientComponent , canActivate: [AuthGuard] },
+  { path: 'productos/edit/:id', component: ProductFormComponent , canActivate: [AuthGuard] },
 ];

@@ -24,7 +24,6 @@ export class AuthService {
           const authHeader = response.headers.get('Authorization');
           if (authHeader?.startsWith('Bearer ')) {
             const token = authHeader.replace('Bearer ', '');
-            console.log(token)
             localStorage.setItem(this.tokenKey, token);
           }
         }),
