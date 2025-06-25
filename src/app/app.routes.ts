@@ -6,6 +6,7 @@ import { FacturaCreateComponent } from './facturas/factura-create/factura-create
 import { FacturaViewComponent } from './facturas/factura-view/factura-view.component';
 import { ProductsListComponent } from './views/products-list/products-list.component';
 import { AuthGuard } from './auth.guard';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 
 export const routes: Routes = [
   { path: '', component: SessionComponent },
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'facturas/create/:clientId', component: FacturaCreateComponent , canActivate: [AuthGuard] },
   { path: 'facturas/show/:clientId', component: FacturaViewComponent, canActivate: [AuthGuard] },
   { path: 'productos', component: ProductsListComponent , canActivate: [AuthGuard] },
+  { path: 'productos/create', component: ProductFormComponent , canActivate: [AuthGuard] },
   { path: 'products/edit/:id', component: EditClientComponent , canActivate: [AuthGuard] },
 ];
