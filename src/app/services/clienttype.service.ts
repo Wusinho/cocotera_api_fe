@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../environments/environment';
 export interface ClientType {
   id: number;
   nombre: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class ClientTypeService {
+  private baseUrl = `${environment.apiUrl}/admin/tipoclientes`;
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient) {}
-
-
-getClientType(): Observable<ClientType[]> {
-    console.log("USANDO CLIENTYPE SERVICE")
-  return this.http.get<ClientType[]>('/admin/tipoclientes');
-}
+  getClientType(): Observable<ClientType[]> {
+    console.log('USANDO CLIENTYPE SERVICE');
+    console.log(this.baseUrl);
+    return this.http.get<ClientType[]>(this.baseUrl);
+  }
 }
