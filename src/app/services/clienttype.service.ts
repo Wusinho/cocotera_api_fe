@@ -15,8 +15,6 @@ export class ClientTypeService {
   constructor(private http: HttpClient) { }
 
   getClientType(): Observable<ClientType[]> {
-    console.log('USANDO CLIENTYPE SERVICE');
-    console.log(this.baseUrl);
     return this.http.get<ClientType[]>(this.baseUrl);
   }
 }

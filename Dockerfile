@@ -10,5 +10,4 @@ WORKDIR /app
 RUN npm install -g http-server
 COPY --from=build /app/dist/cocotera_api_fe/browser /app
 EXPOSE 4200
-CMD ["http-server", "/app", "-p", "4200"]
-
+CMD ["http-server", "/app", "-p", "4200", "-s"]

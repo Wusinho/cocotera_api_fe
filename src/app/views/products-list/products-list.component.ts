@@ -33,7 +33,6 @@ export class ProductsListComponent implements OnInit {
   }
 
   editarProducto(producto: any) {
-    console.log(producto);
     this.router.navigate(['/productos/edit', producto.id]);
   }
 }

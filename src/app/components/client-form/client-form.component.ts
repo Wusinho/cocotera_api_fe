@@ -25,7 +25,7 @@ export class ClientFormComponent implements OnInit {
     private clientService: ClientService,
     private route: ActivatedRoute,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.clientForm = this.fb.group({
@@ -68,7 +68,6 @@ export class ClientFormComponent implements OnInit {
 
     if (this.editing) {
       const id = +this.route.snapshot.paramMap.get('id')!;
-      console.log('ID ' + id);
       this.clientService.updateClient(id, clientData).subscribe(() => {
         this.router.navigate(['/clients']);
       });
