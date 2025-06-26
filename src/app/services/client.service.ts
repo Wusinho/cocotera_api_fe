@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Client {
   id: number;
@@ -54,11 +55,22 @@ export class ClientService {
     });
   }
 
-  getClient(id: number): Observable<Client> {
+  getClient(id: number): Observable<any> {
     return this.http.get<Client>(`${this.baseUrl}/${id}`);
   }
 
-  updateClient(id: number, client: Client): Observable<any> {
+  updateClient(id: number, client: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}`, client);
+  }
+
+  createClient(client: any): Observable<any> {
+    const url = `${environment.apiUrl}/admin/clientes`;
+    console.log(url);
+
+    return this.http.post<any>(url, client);
+  }
+
+  getClientType(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/admin/tipoclientes`);
   }
 }

@@ -1,7 +1,6 @@
 <div class="container">
   <h1>Clientes</h1>
-
-<a class="btn btn-primary m-3" routerLink="/productos" href="#">Go to Productos</a>
+  <button class="btn btn-primary" (click)="createClient()">Nuevo Cliente</button>
 <div class="mb-3">
   <label for="clientType" class="form-label">Tipo de Cliente:</label>
   <select
@@ -21,7 +20,7 @@
   <thead>
     <tr>
       <th scope="col">Id</th>
-      <th scope="col">Nombre del CLiente</th>
+      <th scope="col">Nombre del Cliente</th>
       <th scope="col">DNI</th>
       <th scope="col">Acciones</th>
     </tr>

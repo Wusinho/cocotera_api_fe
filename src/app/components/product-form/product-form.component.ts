@@ -59,8 +59,6 @@ export class ProductFormComponent implements OnInit {
       ...this.productForm.value,
       tallaId: +this.productForm.value.tallaId
     }
-    console.log(productData)
-
 
     if (this.editing) {
       const id = +this.route.snapshot.paramMap.get('id')!;

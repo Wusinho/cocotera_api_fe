@@ -13,7 +13,6 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './client-list.component.html',
-  styleUrl: './client-list.component.css',
 })
 export class ClientListComponent implements OnInit {
   clients: Client[] = [];
@@ -30,7 +29,7 @@ export class ClientListComponent implements OnInit {
     private clientService: ClientService,
     private clientTypeService: ClientTypeService,
     private router: Router,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadClients();
@@ -80,5 +79,9 @@ export class ClientListComponent implements OnInit {
 
   clientFacturas(clientId: number) {
     this.router.navigate(['/facturas/show', clientId]);
+  }
+
+  createClient() {
+    this.router.navigate(['/clients/create']);
   }
 }
