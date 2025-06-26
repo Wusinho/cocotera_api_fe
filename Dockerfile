@@ -1,20 +1,15 @@
-# Stage 1: Build the angular application
-FROM node:18 as build
 
+# Etapa de build
+FROM node:18 AS builder
 WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm install
-
 COPY . .
+RUN npm install && npm run build --prod
 
-RUN npm run build -- --configuration=production
+# Etapa de producción
+FROM node:18-slim
+WORKDIR /app
+RUN npm install -g http-server
+COPY --from=builder /app/dist/cocotera_api_fe/browser .
+EXPOSE 4200
+CMD ["http-server", "-p", "4200"]
 
-# Stage 2: Serve the application from Nginx
-FROM nginx:alpine
-
-COPY --from=build /app/dist/cocotera_api_fe /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
