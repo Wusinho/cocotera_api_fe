@@ -2,6 +2,13 @@
   <h2>Crear Factura</h2>
 
   <form (ngSubmit)="createFactura()">
+    <div class="mb-3">
+      <label for="categoriaSelect" class="form-label">Filtrar por Categoría:</label>
+      <select class="form-select" id="categoriaSelect" [(ngModel)]="categoriaSeleccionada" (change)="filtrarProductos()" name="categoria">
+        <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
+      </select>
+    </div>
+
     <table class="table table-striped">
       <thead>
         <tr>
@@ -13,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let producto of productos">
+        <tr *ngFor="let producto of productosFiltrados">
           <td>{{ producto.nombre }}</td>
           <td>${{ producto.precio }}</td>
           <td>{{ producto.cantidad || 0 }}</td>

@@ -16,11 +16,8 @@ export class ClientTypeService {
   constructor(private http: HttpClient) {}
 
 
-
 getClientType(): Observable<ClientType[]> {
+    console.log("USANDO CLIENTYPE SERVICE")
   return this.http.get<ClientType[]>('/admin/tipoclientes');
 }
-
-
-
 }

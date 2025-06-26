@@ -28,9 +28,9 @@ export interface PageResponse<T> {
   providedIn: 'root',
 })
 export class ClientService {
-  private baseUrl = '/admin/clientes';
+  private baseUrl = `${environment.apiUrl}/admin/clientes`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getClients(
     page: number,
@@ -46,11 +46,11 @@ export class ClientService {
       params.tipo_cliente_id = tipoClienteId;
     }
 
-    return this.http.get<PageResponse<Client>>(`${this.baseUrl}`, { params });
+    return this.http.get<PageResponse<Client>>(this.baseUrl, { params });
   }
 
   getClientsWithParams(params: any): Observable<PageResponse<Client>> {
-    return this.http.get<PageResponse<Client>>('/admin/clientes', {
+    return this.http.get<PageResponse<Client>>(this.baseUrl, {
       params,
     });
   }
@@ -64,10 +64,7 @@ export class ClientService {
   }
 
   createClient(client: any): Observable<any> {
-    const url = `${environment.apiUrl}/admin/clientes`;
-    console.log(url);
-
-    return this.http.post<any>(url, client);
+    return this.http.post<any>(this.baseUrl, client);
   }
 
   getClientType(): Observable<any[]> {
