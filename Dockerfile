@@ -1,14 +1,14 @@
-# Etapa de build
-FROM node:18 AS builder
+FROM node:18 AS build
 WORKDIR /app
+COPY package*.json ./
+RUN npm install
 COPY . .
-RUN npm install && npm run build --prod
+RUN npm run build --prod
 
-# Etapa de producción
 FROM node:18-slim
 WORKDIR /app
 RUN npm install -g http-server
-COPY --from=builder /app/dist/cocotera_api_fe/browser /app/browser
+COPY --from=build /app/dist/cocotera_api_fe/browser /app
 EXPOSE 4200
-CMD ["http-server", "/app/browser", "-p", "4200"]
+CMD ["http-server", "/app", "-p", "4200"]
 
