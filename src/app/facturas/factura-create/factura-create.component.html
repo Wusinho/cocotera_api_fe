@@ -23,17 +23,15 @@
         <tr *ngFor="let producto of productosFiltrados">
           <td>{{ producto.nombre }}</td>
           <td>${{ producto.precio }}</td>
-
-<td>
-  <input
-    type="number"
-    class="form-control form-control-sm"
-    [(ngModel)]="producto.cantidad"
-    [name]="'cantidad_' + producto.id"
-    min="0"
-  />
-</td>
-
+          <td>
+            <input
+              type="number"
+              class="form-control form-control-sm"
+              [(ngModel)]="producto.cantidad"
+              [name]="'cantidad_' + producto.id"
+              min="0"
+              />
+          </td>
           <td>${{ (producto.cantidad || 0) * producto.precio }}</td>
           <td>
             <button type="button" class="btn btn-success btn-sm" (click)="incrementCantidad(producto)">+</button>
