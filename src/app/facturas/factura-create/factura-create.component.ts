@@ -43,55 +43,53 @@ export class FacturaCreateComponent implements OnInit {
     this.productoService.getProductos().subscribe((data) => {
       this.productos = data.map((producto) => ({
         ...producto,
-        cantidad: 0, // Initialize quantity for all products
-        categoria: producto.categoria || 'Sin Categoría', // Ensure category exists
+        cantidad: 0,
+        categoria: producto.categoria || 'Sin Categoría',
       }));
       this.categorias = [
         'Todas',
         ...new Set(this.productos.map((p) => p.categoria)),
       ];
-      this.filtrarProductos(); // Initial filter
+      this.filtrarProductos();
     });
   }
 
   filtrarProductos(): void {
-    const productosConCantidad = this.productos.filter((p) => p.cantidad > 0);
-    let productosPorCategoria: Producto[] = [];
+    const seleccionados = this.productos.filter((p) => p.cantidad > 0);
 
-    if (this.categoriaSeleccionada === 'Todas') {
-      productosPorCategoria = this.productos;
-    } else {
-      productosPorCategoria = this.productos.filter(
-        (p) => p.categoria === this.categoriaSeleccionada,
-      );
-    }
+    const porCategoria =
+      this.categoriaSeleccionada === 'Todas'
+        ? this.productos
+        : this.productos.filter(
+          (p) => p.categoria === this.categoriaSeleccionada,
+        );
 
-    // Combine products with quantity > 0 and products from the selected category
-    const combinedProducts = new Map<number, Producto>();
+    // Unir ambos sin duplicar
+    const set = new Set<number>();
+    this.productosFiltrados = [];
 
-    productosConCantidad.forEach((p) => combinedProducts.set(p.id, p));
-    productosPorCategoria.forEach((p) => {
-      if (!combinedProducts.has(p.id)) {
-        combinedProducts.set(p.id, p);
+    for (let p of [...seleccionados, ...porCategoria]) {
+      if (!set.has(p.id)) {
+        this.productosFiltrados.push(p);
+        set.add(p.id);
       }
-    });
-
-    this.productosFiltrados = Array.from(combinedProducts.values());
+    }
   }
-
   goBack() {
     this.router.navigate(['/clients']);
   }
 
   incrementCantidad(producto: Producto) {
-    producto.cantidad++;
-    this.filtrarProductos(); // Re-filter to ensure visibility if category changes
+    const original = this.productos.find((p) => p.id === producto.id);
+    if (original) {
+      original.cantidad++;
+    }
   }
 
   decrementCantidad(producto: Producto) {
-    if (producto.cantidad > 0) {
-      producto.cantidad--;
-      this.filtrarProductos(); // Re-filter to ensure visibility if quantity drops to 0
+    const original = this.productos.find((p) => p.id === producto.id);
+    if (original && original.cantidad > 0) {
+      original.cantidad--;
     }
   }
 
