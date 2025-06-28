@@ -10,12 +10,28 @@
 
     <div class="mb-3">
       <label class="form-label">Categoría</label>
-      <input type="text" class="form-control" formControlName="categoria" />
+      <select class="form-select" formControlName="categoria">
+        <option value="">Seleccione una categoría</option>
+        <option value="Short">Short</option>
+        <option value="Casaca">Casaca</option>
+        <option value="Pantalón">Pantalón</option>
+      </select>
     </div>
 
     <div class="mb-3">
       <label class="form-label">Color</label>
-      <input type="text" class="form-control" formControlName="color" />
+      <select class="form-select" formControlName="color">
+        <option value="">Seleccione un color</option>
+        <option value="Stone Wash">Stone Wash</option>
+        <option value="Celeste">Celeste</option>
+        <option value="Negro">Negro</option>
+        <option value="Azúl">Azúl</option>
+        <option value="Plomo">Plomo</option>
+        <option value="Rojo">Rojo</option>
+        <option value="Verde">Verde</option>
+        <option value="Amarillo">Amarillo</option>
+        <option value="Blanco">Blanco</option>
+      </select>
     </div>
 
     <div class="mb-3">
@@ -37,3 +53,4 @@
     </button>
   </form>
 </div>
+

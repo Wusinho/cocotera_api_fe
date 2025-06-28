@@ -56,9 +56,8 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
-  wformErrors: any = {};
-
   onSubmit(): void {
+    console.log('ONSUBMIT');
     if (this.productForm.invalid) return;
 
     this.formErrors = {};
@@ -74,6 +73,8 @@ export class ProductFormComponent implements OnInit {
         productData,
       )
       : this.productService.crearProducto(productData);
+
+    console.log(req);
 
     req.subscribe({
       next: () => this.router.navigate(['/productos']),
