@@ -14,6 +14,7 @@ export interface Client {
   tipoClienteId: number;
   razonSocial: string;
   ruc: string;
+  activo: boolean;
 }
 
 export interface PageResponse<T> {

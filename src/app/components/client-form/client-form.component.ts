@@ -38,6 +38,7 @@ export class ClientFormComponent implements OnInit {
       razonSocial: ['', Validators.required],
       ruc: ['', Validators.required],
       tipoClienteId: [null, Validators.required],
+      activo: [true],
     });
 
     const id = this.route.snapshot.paramMap.get('id');
@@ -47,6 +48,7 @@ export class ClientFormComponent implements OnInit {
         this.clientForm.patchValue({
           ...client,
           tipoClienteId: client.tipoCliente.id,
+          activo: client.activo
         });
       });
     }
