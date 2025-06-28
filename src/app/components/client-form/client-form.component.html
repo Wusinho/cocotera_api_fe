@@ -52,18 +52,16 @@
       </select>
     </div>
 
-
-<div class="form-check form-switch mb-3" *ngIf="editing">
-  <input
-    class="form-check-input"
-    type="checkbox"
-    role="switch"
-    id="activoSwitch"
-    formControlName="activo"
-  />
-  <label class="form-check-label" for="activoSwitch">Activo</label>
-</div>
-
+    <div class="form-check form-switch mb-3" *ngIf="editing">
+      <input
+      class="form-check-input"
+      type="checkbox"
+      role="switch"
+      id="activoSwitch"
+      formControlName="activo"
+      />
+      <label class="form-check-label" for="activoSwitch">Activo</label>
+      </div>
 
     <button class="btn btn-primary" type="submit" [disabled]="clientForm.invalid">
       {{ editing ? 'Actualizar' : 'Crear' }}
