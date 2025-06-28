@@ -12,6 +12,8 @@ export interface Client {
   telefono: string;
   email: string;
   tipoClienteId: number;
+  razonSocial: string;
+  ruc: string;
 }
 
 export interface PageResponse<T> {

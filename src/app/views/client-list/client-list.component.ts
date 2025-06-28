@@ -29,7 +29,7 @@ export class ClientListComponent implements OnInit {
     private clientService: ClientService,
     private clientTypeService: ClientTypeService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadClients();
