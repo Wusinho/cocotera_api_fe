@@ -36,7 +36,7 @@ export class ClientFormComponent implements OnInit {
       direccion: ['', Validators.required],
       telefono: ['', Validators.required],
       razonSocial: ['', Validators.required],
-      ru: ['', Validators.required],
+      ruc: ['', Validators.required],
       tipoClienteId: [null, Validators.required],
     });
 
@@ -70,6 +70,7 @@ export class ClientFormComponent implements OnInit {
       ...this.clientForm.value,
       tipoClienteId: +this.clientForm.value.tipoClienteId,
     };
+    console.log(clientData);
 
     const req = this.editing
       ? this.clientService.updateClient(
