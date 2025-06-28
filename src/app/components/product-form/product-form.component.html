@@ -5,6 +5,7 @@
     <div class="mb-3">
       <label class="form-label">Nombre</label>
       <input type="text" class="form-control" formControlName="nombre" />
+      <div class="text-danger" *ngIf="formErrors?.nombre">{{ formErrors.nombre }}</div>
     </div>
 
     <div class="mb-3">
