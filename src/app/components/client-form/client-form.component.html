@@ -2,29 +2,45 @@
   <h2>{{ editing ? 'Editar '  : 'Crear ' }} Cliente</h2>
 
   <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+
     <div class="mb-3">
-      <label class="form-label">Nombres</label>
-      <input type="text" class="form-control" formControlName="nombres" />
+      <label class="form-label">Razón Social</label>
+      <input type="text" class="form-control" formControlName="razonSocial" />
+    <div class="text-danger" *ngIf="formErrors?.razonSocial">{{ formErrors.razonSocial }}</div>
     </div>
 
     <div class="mb-3">
+      <label class="form-label">RUC</label>
+      <input type="text" class="form-control" formControlName="ruc" />
+    <div class="text-danger" *ngIf="formErrors?.ruc">{{ formErrors.ruc }}</div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Nombres</label>
+      <input type="text" class="form-control" formControlName="nombres" />
+      <div class="text-danger" *ngIf="formErrors?.nombres">{{ formErrors.nombres }}</div>
+    </div>
+   <div class="mb-3">
       <label class="form-label">Apellidos</label>
       <input type="text" class="form-control" formControlName="apellidos" />
+      <div class="text-danger" *ngIf="formErrors?.apellidos">{{ formErrors.apellidos }}</div>
     </div>
 
     <div class="mb-3">
       <label class="form-label">Dni</label>
       <input type="text" class="form-control" formControlName="dni" />
+      <div class="text-danger" *ngIf="formErrors?.dni">{{ formErrors.dni }}</div>
     </div>
 
     <div class="mb-3">
       <label class="form-label">Direccion</label>
       <input type="text" class="form-control" formControlName="direccion" />
+      <div class="text-danger" *ngIf="formErrors?.direccion">{{ formErrors.direccion }}</div>
     </div>
 
     <div class="mb-3">
       <label class="form-label">Telefono</label>
       <input type="text" class="form-control" formControlName="telefono" />
+      <div class="text-danger" *ngIf="formErrors?.telefono">{{ formErrors.telefono }}</div>
     </div>
 
     <div class="mb-3">

@@ -19,6 +19,7 @@ export class ClientFormComponent implements OnInit {
   clientForm!: FormGroup;
   editing = false;
   types: any[] = [];
+  formErrors: any = {};
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +35,8 @@ export class ClientFormComponent implements OnInit {
       dni: ['', Validators.required],
       direccion: ['', Validators.required],
       telefono: ['', Validators.required],
+      razonSocial: ['', Validators.required],
+      ru: ['', Validators.required],
       tipoClienteId: [null, Validators.required],
     });
 
@@ -61,20 +64,25 @@ export class ClientFormComponent implements OnInit {
   onSubmit(): void {
     if (this.clientForm.invalid) return;
 
+    this.formErrors = {};
+
     const clientData = {
       ...this.clientForm.value,
       tipoClienteId: +this.clientForm.value.tipoClienteId,
     };
 
-    if (this.editing) {
-      const id = +this.route.snapshot.paramMap.get('id')!;
-      this.clientService.updateClient(id, clientData).subscribe(() => {
-        this.router.navigate(['/clients']);
-      });
-    } else {
-      this.clientService.createClient(clientData).subscribe(() => {
-        this.router.navigate(['/clients']);
-      });
-    }
+    const req = this.editing
+      ? this.clientService.updateClient(
+        +this.route.snapshot.paramMap.get('id')!,
+        clientData,
+      )
+      : this.clientService.createClient(clientData);
+
+    req.subscribe({
+      next: () => this.router.navigate(['/clients']),
+      error: (err) => {
+        this.formErrors = err.error;
+      },
+    });
   }
 }
