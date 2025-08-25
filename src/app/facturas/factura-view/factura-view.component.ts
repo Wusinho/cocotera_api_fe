@@ -41,8 +41,6 @@ export class FacturaViewComponent implements OnInit {
     return this.getSubTotal(factura) + this.getIGV(factura);
   }
 
-}
-
   goBack() {
     this.router.navigate(['/clients']);
   }
