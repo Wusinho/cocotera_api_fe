@@ -29,8 +29,18 @@ export class FacturaViewComponent implements OnInit {
       this.facturas = data
     )};
 
- getFacturaTotal(factura: Factura): number {
-  return factura.productos.reduce((sum, item) => sum + item.total, 0);
+  getSubTotal(factura: Factura): number {
+    return factura.productos.reduce((sum, item) => sum + item.total, 0);
+  }
+
+  getIGV(factura: Factura): number {
+    return this.getSubTotal(factura) * 0.18;
+  }
+
+  getTotalConIGV(factura: Factura): number {
+    return this.getSubTotal(factura) + this.getIGV(factura);
+  }
+
 }
 
   goBack() {
