@@ -11,7 +11,6 @@ describe('FacturaViewComponent (with template)', () => {
   let fixture: ComponentFixture<FacturaViewComponent>;
   let component: FacturaViewComponent;
 
-  // ---- Mocks ----
   const mockActivatedRoute = {
     snapshot: { paramMap: { get: (_: string) => '42' } }
   } as Partial<ActivatedRoute>;
@@ -20,7 +19,6 @@ describe('FacturaViewComponent (with template)', () => {
     navigate: jasmine.createSpy('navigate')
   } as Partial<Router>;
 
-  // Build realistic data to satisfy template bindings
   const sampleFacturas: Factura[] = [
     {
       id: 101,
@@ -83,7 +81,7 @@ describe('FacturaViewComponent (with template)', () => {
     return (el.textContent || '').replace(/\s+/g, ' ').trim();
   }
 
-  it('deberia crear', () => {
+  it('deberia crear crear el componente', () => {
     expect(component).toBeTruthy();
   });
 
@@ -102,7 +100,7 @@ describe('FacturaViewComponent (with template)', () => {
     expect(text(pTags[1].nativeElement)).toContain('Dirección: Calle 1 #234');
   });
 
-  it('should render product rows for the first factura', () => {
+  it('Deberia renderizar los productos por fila en la factura', () => {
     fixture.detectChanges();
 
     const tables = fixture.debugElement.queryAll(By.css('table'));
@@ -122,7 +120,7 @@ describe('FacturaViewComponent (with template)', () => {
   });
 
 
-it('should render subtotal/IGV/total for the first factura footer', () => {
+it('Deberia renderizar el subtotal/IGV/total para la primera factura en el footer', () => {
   fixture.detectChanges();
 
   const f = sampleFacturas[0];
@@ -158,7 +156,7 @@ it('should render subtotal/IGV/total for the first factura footer', () => {
 });
 
 
-  it('getSubTotal / getIGV / getTotalConIGV deberia ser igual', () => {
+  it('getSubTotal / getIGV / getTotalConIGV deberia ser igual en los calculos de comprobacion', () => {
     const f = sampleFacturas[0];
     expect(component.getSubTotal(f)).toBe(80);
     expect(component.getIGV(f)).toBeCloseTo(14.4, 6);
